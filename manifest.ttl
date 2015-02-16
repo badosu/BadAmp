@@ -1,0 +1,12 @@
+@prefix lv2: <http://lv2plug.in/ns/lv2core#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
+
+<http://bado.so/bad-amp> a lv2:Plugin ;
+  lv2:binary <amp.so> ;
+  rdfs:seeAlso <amp.ttl> .
+
+<http://bado.so/bad-amp#ui>
+  a ui:GtkUI ;
+  ui:binary <amp_gui.so> ;
+  rdfs:seeAlso <amp.ttl> .

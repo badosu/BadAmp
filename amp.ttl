@@ -1,0 +1,53 @@
+@prefix lv2:  <http://lv2plug.in/ns/lv2core#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix ui: <http://lv2plug.in/ns/extensions/ui#>.
+
+<http://bado.so/bad-amp#ui>
+  a ui:GtkUI;
+  ui:binary <amp_gui.so>;
+  ui:requiredFeature ui:makeResident .
+
+<http://bado.so/bad-amp> a lv2:Plugin ;
+  doap:name "Badosu Amplifier" ,
+    "简单放大器"@ch ,
+    "Einfacher Verstärker"@de ,
+    "Simple Amp"@en-gb ,
+    "Amplificador Simple"@es ,
+    "Amplificateur de Base"@fr ,
+    "Amplificatore Semplice"@it ,
+    "簡単なアンプ"@jp ,
+    "Просто Усилитель"@ru ;
+  doap:license <http://usefulinc.com/doap/licenses/gpl> ;
+  lv2:optionalFeature lv2:hardRTCapable ;
+  ui:ui <http://bado.so/bad-amp#ui>;
+  lv2:port [
+    a lv2:InputPort ;
+    a lv2:ControlPort ;
+    lv2:index 0 ;
+    lv2:symbol "gain" ;
+    lv2:name "Gain" ,
+      "收益"@ch ,
+      "Gewinn"@de ,
+      "Gain"@en-gb ,
+      "Aumento"@es ,
+      "Gain"@fr ,
+      "Guadagno"@it ,
+      "利益"@jp ,
+      "Увеличение"@ru ;
+    lv2:default 0.0 ;
+    lv2:minimum -90.0 ;
+    lv2:maximum 24.0 ;
+  ] , [
+    a lv2:AudioPort ;
+    a lv2:InputPort ;
+    lv2:index 1 ;
+    lv2:symbol "in" ;
+    lv2:name "In"
+  ] , [
+    a lv2:AudioPort ;
+    a lv2:OutputPort ;
+    lv2:index 2 ;
+    lv2:symbol "out" ;
+    lv2:name "Out"
+  ] .
