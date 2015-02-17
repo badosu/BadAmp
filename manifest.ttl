@@ -7,6 +7,6 @@
   rdfs:seeAlso <amp.ttl> .
 
 <http://bado.so/bad-amp#ui>
-  a ui:GtkUI ;
-  ui:binary <amp_gui.so> ;
+  a ui:X11UI ;
+  ui:binary <amp_gui_fltk.so> ;
   rdfs:seeAlso <amp.ttl> .

@@ -4,8 +4,8 @@
 @prefix ui: <http://lv2plug.in/ns/extensions/ui#>.
 
 <http://bado.so/bad-amp#ui>
-  a ui:GtkUI;
-  ui:binary <amp_gui.so>;
+  a ui:X11UI;
+  ui:binary <amp_gui_fltk.so>;
   ui:requiredFeature ui:makeResident .
 
 <http://bado.so/bad-amp> a lv2:Plugin ;
