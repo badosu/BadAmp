@@ -3,7 +3,9 @@
 
 #include <gtk/gtk.h>
 
-#include "lv2_ui.h"
+#include "lv2/lv2plug.in/ns/lv2core/lv2.h"
+#include "lv2/lv2plug.in/ns/extensions/ui/ui.h"
+
 #include "amp.h"
 
 typedef struct {
