@@ -36,7 +36,7 @@ AmpGui::AmpGui(QWidget *parent)
 	volume_label = new QLabel();
 
 	volume_label->setText("0 dB");
-	volume_dial->setRange(-90, 24);
+	volume_dial->setRange(-900, 240);
 
 	QVBoxLayout* layout = new QVBoxLayout();
 	layout->addWidget(volume_dial);
@@ -45,9 +45,9 @@ AmpGui::AmpGui(QWidget *parent)
 }
 
 void AmpGui::volumeChanged(int value) {
-	volume_label->setText(QString("%1 dB").arg(value));
+	float gain = (float)volume_dial->value()/10.0f;
 
-	gain = volume_dial->value();
+	volume_label->setText(QString("%1 dB").arg(gain));
 	write_function(controller, AMP_GAIN, sizeof(gain), 0, &gain);
 }
 
