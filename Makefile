@@ -8,13 +8,13 @@ $(BUNDLE): manifest.ttl amp.ttl amp.so amp_gui_qt.so
 	cp $^ $(BUNDLE)
 
 amp.so: amp.c
-	gcc -shared -fPIC -DPIC amp.c -o amp.so
+	gcc -shared -fPIC -DPIC $< -o $@
 
 amp_gui_gtk.so: amp_gui_gtk.c
-	gcc -shared -fPIC -DPIC amp_gui_gtk.c `pkg-config --cflags --libs gtk+-2.0` -o amp_gui_gtk.so
+	gcc -shared -fPIC -DPIC `pkg-config --cflags --libs gtk+-2.0` $< -o $@
 
 amp_gui_fltk.so: amp_gui_fltk.cpp
-	g++ -shared -fPIC -lcairo -I/usr/include/ntk -lntk -Wl,-z,nodelete amp_gui_fltk.cpp -o amp_gui_fltk.so
+	g++ -shared -fPIC -lcairo -I/usr/include/ntk -lntk -Wl,-z,nodelete $< -o $@
 
 # See: http://qt-project.org/doc/qt-4.8/moc.html#writing-make-rules-for-invoking
 amp_gui_qt.o: amp_gui_qt.moc.cpp
@@ -23,10 +23,10 @@ amp_gui_qt.moc.cpp: amp_gui_qt.cpp
 	moc-qt4 $(DEFINES) $(INCPATH) -i $< -o $@
 
 amp_gui_qt.so: amp_gui_qt.cpp amp_gui_qt.moc.cpp
-	g++ -shared -fPIC -Wl,--no-undefined `pkg-config --cflags --libs QtCore QtGui` amp_gui_qt.cpp -o amp_gui_qt.so
+	g++ -shared -fPIC -Wl,--no-undefined `pkg-config --cflags --libs QtCore QtGui` $< -o $@
 
 clean:
-	rm -rf $(BUNDLE) *.so
+	rm -rf $(BUNDLE) *.so *.moc.cpp
 
 install: $(BUNDLE)
 	mkdir -p $(INSTALL_DIR)
