@@ -22,6 +22,11 @@ Based on [amp_with_gui](https://github.com/Joeboy/joeboy-lv2-plugins/tree/master
 
 ![BadAmp on GTK](https://github.com/badosu/BadAmp/raw/master/screenshots/gtk.png)
 
+QT4
+---
+
+![BadAmp on QT](https://github.com/badosu/BadAmp/raw/master/screenshots/qt4.png)
+
 Run it
 ------
 
@@ -29,6 +34,7 @@ Dependencies:
 
 - [Gtk2](http://www.gtk.org/)
 - [NTK](http://non.tuxfamily.org/ntk/)
+- [Qt4](http://www.qt.io/)
 
 You'll also need a LV2 host to test it, I recommend
 [Jalv](http://drobilla.net/software/jalv/).

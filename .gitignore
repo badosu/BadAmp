@@ -2,3 +2,5 @@ amp.lv2
 amp.so
 amp_gui_gtk.so
 amp_gui_fltk.so
+amp_gui_qt.moc.cpp
+amp_gui_qt.so

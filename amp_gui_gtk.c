@@ -24,7 +24,6 @@ value_changed_cb(GtkWidget* widget, gpointer data) {
 
 static GtkWidget*
 make_gui(AmpGui* pluginGui) {
-	// Return a pointer to a gtk widget containing our GUI
 	GtkWidget* container = gtk_vbox_new(FALSE, 2);
 
 	pluginGui->volume_control = gtk_vscale_new_with_range(-90, 24, 1);
@@ -70,11 +69,8 @@ cleanup(LV2UI_Handle ui) {
 }
 
 static void
-port_event(LV2UI_Handle ui,
-		uint32_t port_index,
-		uint32_t buffer_size,
-		uint32_t format,
-		const void * buffer) {
+port_event(LV2UI_Handle ui, uint32_t port_index, uint32_t buffer_size,
+	uint32_t format, const void * buffer) {
 	AmpGui* pluginGui = (AmpGui*) ui;
 	float* pval = (float*) buffer;
 
