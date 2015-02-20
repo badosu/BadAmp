@@ -80,7 +80,11 @@ instantiate(const struct _LV2UI_Descriptor* descriptor,
 }
 
 void
-cleanup(LV2UI_Handle ui) { }
+cleanup(LV2UI_Handle ui) {
+	AmpGui* pluginGui = (AmpGui*) ui;
+
+	delete pluginGui;
+}
 
 void
 port_event(LV2UI_Handle ui, uint32_t port_index, uint32_t buffer_size,
