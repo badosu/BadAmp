@@ -3,24 +3,26 @@
 @prefix doap: <http://usefulinc.com/ns/doap#> .
 @prefix ui: <http://lv2plug.in/ns/extensions/ui#>.
 
-<http://bado.so/bad-amp#ui>
+<http://bado.so/bad-amp#gtk>
+  a ui:GtkUI ;
+  ui:binary <amp_gui_gtk.so> ;
+  ui:requiredFeature ui:makeResident .
+<http://bado.so/bad-amp#qt>
   a ui:Qt4UI;
   ui:binary <amp_gui_qt.so>;
   ui:requiredFeature ui:makeResident .
+<http://bado.so/bad-amp#ntk>
+  a ui:X11UI ;
+  ui:binary <amp_gui_fltk.so> ;
+  ui:requiredFeature ui:makeResident .
 
 <http://bado.so/bad-amp> a lv2:Plugin ;
-  doap:name "Badosu Amplifier" ,
-    "简单放大器"@ch ,
-    "Einfacher Verstärker"@de ,
-    "Simple Amp"@en-gb ,
-    "Amplificador Simple"@es ,
-    "Amplificateur de Base"@fr ,
-    "Amplificatore Semplice"@it ,
-    "簡単なアンプ"@jp ,
-    "Просто Усилитель"@ru ;
+  doap:name "Badosu Amplifier";
   doap:license <http://usefulinc.com/doap/licenses/gpl> ;
   lv2:optionalFeature lv2:hardRTCapable ;
-  ui:ui <http://bado.so/bad-amp#ui>;
+  ui:ui <http://bado.so/bad-amp#gtk>;
+  ui:ui <http://bado.so/bad-amp#qt>;
+  ui:ui <http://bado.so/bad-amp#ntk>;
   lv2:port [
     a lv2:InputPort ;
     a lv2:ControlPort ;

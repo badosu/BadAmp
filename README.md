@@ -27,19 +27,44 @@ QT4
 
 ![BadAmp on QT](https://github.com/badosu/BadAmp/raw/master/screenshots/qt4.png)
 
-Run it
-------
+Setup your LV2 bundle
+---------------------
 
-Dependencies:
+Create the DSP plugin and bundle directory with `make`.
 
-- [Gtk2](http://www.gtk.org/)
-- [NTK](http://non.tuxfamily.org/ntk/)
-- [Qt4](http://www.qt.io/)
+If you want you can make any of the interface binaries available, check
+if you meet the dependency requirements first.
 
-You'll also need a LV2 host to test it, I recommend
+Bear in mind that hosts usually have an internal logic to decide which
+UI they should use, so if you want to check a particular interface
+you'll have to make just that one.
+
+You can always `sudo make uninstall` later and make a different gui,
+or you can `make all` to make all of them at once.
+
+### [Gtk2](http://www.gtk.org/)
+
+`make amp_gui_gtk.so`
+
+### [Qt4](http://www.qt.io/)
+
+`make amp_gui_qt.so`
+
+### [NTK](http://non.tuxfamily.org/ntk/) and [Cairo](http://cairographics.org/)
+
+`make amp_gui_fltk.so`
+
+Install and Test
+----------------
+
+After setting up your bundle, use: `sudo make install` to install it.
+
+If you have problems you can check if your installation was successful
+by checking if `http://bado.so/bad-amp` appears on the list provided by
+the command `lv2ls`.
+
+You'll need a LV2 host to test it, I recommend
 [Jalv](http://drobilla.net/software/jalv/).
-
-Install with: `sudo make install`
 
 Test with:    `jalv.gtk http://bado.so/bad-amp`
 

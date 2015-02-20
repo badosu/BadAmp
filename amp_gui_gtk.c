@@ -8,6 +8,8 @@
 
 #include "amp.h"
 
+#define AMP_UI_URI  "http://bado.so/bad-amp#gtk"
+
 typedef struct {
 	GtkWidget *volume_control;
 	float gain;

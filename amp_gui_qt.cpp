@@ -12,6 +12,8 @@
 
 #include "amp.h"
 
+#define AMP_UI_URI  "http://bado.so/bad-amp#qt"
+
 class AmpGui : public QWidget {
 	Q_OBJECT
 

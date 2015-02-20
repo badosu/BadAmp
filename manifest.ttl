@@ -6,7 +6,15 @@
   lv2:binary <amp.so> ;
   rdfs:seeAlso <amp.ttl> .
 
-<http://bado.so/bad-amp#ui>
+<http://bado.so/bad-amp#gtk>
+  a ui:GtkUI ;
+  ui:binary <amp_gui_gtk.so> ;
+  rdfs:seeAlso <amp.ttl> .
+<http://bado.so/bad-amp#qt>
   a ui:Qt4UI ;
   ui:binary <amp_gui_qt.so> ;
+  rdfs:seeAlso <amp.ttl> .
+<http://bado.so/bad-amp#ntk>
+  a ui:X11UI ;
+  ui:binary <amp_gui_fltk.so> ;
   rdfs:seeAlso <amp.ttl> .

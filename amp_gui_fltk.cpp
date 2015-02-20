@@ -8,6 +8,8 @@
 
 #include "amp.h"
 
+#define AMP_UI_URI  "http://bado.so/bad-amp#ntk"
+
 typedef struct {
 	Fl_Dial *volume_control;
 	float gain;
