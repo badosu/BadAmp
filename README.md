@@ -36,11 +36,12 @@ If you want you can make any of the interface binaries available, check
 if you meet the dependency requirements first.
 
 Bear in mind that hosts usually have an internal logic to decide which
-UI they should use, so if you want to check a particular interface
-you'll have to make just that one.
+UI they should use; e.g. Qtractor which is made with QT will choose the
+qt gui; so if you want to check a particular interface you'll have to
+make just that one.
 
 You can always `sudo make uninstall` later and make a different gui,
-or you can `make all` to make all of them at once.
+or you can `make all` of them at once.
 
 ### [Gtk2](http://www.gtk.org/)
 
@@ -60,7 +61,7 @@ Install and Test
 After setting up your bundle, use: `sudo make install` to install it.
 
 If you have problems you can check if your installation was successful
-by checking if `http://bado.so/bad-amp` appears on the list provided by
+verifying whether `http://bado.so/bad-amp` appears on the list provided by
 the command `lv2ls`.
 
 You'll need a LV2 host to test it, I recommend

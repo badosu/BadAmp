@@ -7,7 +7,6 @@
 #define DB_CO(g) ((g) > -90.0f ? powf(10.0f, (g) * 0.05f) : 0.0f)
 
 typedef struct {
-	// Port buffers
 	const float* gain;
 	const float* input;
 	float*       output;

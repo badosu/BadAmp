@@ -18,47 +18,47 @@ class AmpGui : public QWidget {
 	Q_OBJECT
 
 public:
-    AmpGui(QWidget* parent = 0);
+	AmpGui(QWidget* parent = 0);
 
-	QDial* volume_dial;
-	QLabel* volume_label;
+	QDial* gain_dial;
+	QLabel* gain_label;
 	float gain;
 
 	LV2UI_Controller controller;
 	LV2UI_Write_Function write_function;
 
 public slots:
-	void volumeChanged(int value);
+	void gainChanged(int value);
 
 };
 
-AmpGui::AmpGui(QWidget *parent)
+AmpGui::AmpGui(QWidget* parent)
 	: QWidget(parent) {
-	volume_dial = new QDial();
-	volume_label = new QLabel();
+	gain_dial = new QDial();
+	gain_label = new QLabel();
 
-	volume_label->setText("0 dB");
-	volume_dial->setRange(-900, 240);
+	gain_label->setText("0 dB");
+	gain_dial->setRange(-900, 240);
 
 	QVBoxLayout* layout = new QVBoxLayout();
-	layout->addWidget(volume_dial);
-	layout->addWidget(volume_label);
+	layout->addWidget(gain_dial);
+	layout->addWidget(gain_label);
 	setLayout(layout);
 }
 
-void AmpGui::volumeChanged(int value) {
-	float gain = (float)volume_dial->value()/10.0f;
+void AmpGui::gainChanged(int value) {
+	float gain = (float)gain_dial->value()/10.0f;
 
-	volume_label->setText(QString("%1 dB").arg(gain));
+	gain_label->setText(QString("%1 dB").arg(gain));
 	write_function(controller, AMP_GAIN, sizeof(gain), 0, &gain);
 }
 
 LV2UI_Handle
-instantiate(const struct _LV2UI_Descriptor * descriptor,
-		const char* plugin_uri, const char* bundle_path,
-		LV2UI_Write_Function write_function,
-		LV2UI_Controller controller, LV2UI_Widget* widget,
-		const LV2_Feature* const * features) {
+instantiate(const struct _LV2UI_Descriptor* descriptor,
+	const char* plugin_uri, const char* bundle_path,
+	LV2UI_Write_Function write_function,
+	LV2UI_Controller controller, LV2UI_Widget* widget,
+	const LV2_Feature* const* features) {
 
 	if (strcmp(plugin_uri, AMP_URI) != 0) {
 		fprintf(stderr, "AMP_UI error: this GUI does not support plugin with URI %s\n", plugin_uri);
@@ -70,8 +70,8 @@ instantiate(const struct _LV2UI_Descriptor * descriptor,
 
 	if (pluginGui == NULL) return NULL;
 
-	QObject::connect(pluginGui->volume_dial, SIGNAL(valueChanged(int)),
-		pluginGui, SLOT(volumeChanged(int)));
+	QObject::connect(pluginGui->gain_dial, SIGNAL(valueChanged(int)),
+		pluginGui, SLOT(gainChanged(int)));
 
 	pluginGui->controller = controller;
 	pluginGui->write_function = write_function;
@@ -84,7 +84,7 @@ cleanup(LV2UI_Handle ui) { }
 
 void
 port_event(LV2UI_Handle ui, uint32_t port_index, uint32_t buffer_size,
-	uint32_t format, const void * buffer) {
+	uint32_t format, const void* buffer) {
 	AmpGui* pluginGui = (AmpGui*) ui;
 	float* pval = (float*) buffer;
 
@@ -92,7 +92,7 @@ port_event(LV2UI_Handle ui, uint32_t port_index, uint32_t buffer_size,
 		return;
 	}
 
-	pluginGui->volume_dial->setValue((int)(*pval + 0.5));
+	pluginGui->gain_dial->setValue((int)(*pval + 0.5));
 }
 
 const void*

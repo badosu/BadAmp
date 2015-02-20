@@ -11,16 +11,16 @@
 #define AMP_UI_URI  "http://bado.so/bad-amp#ntk"
 
 typedef struct {
-	Fl_Dial *volume_control;
+	Fl_Dial* gain_control;
 	float gain;
 
 	LV2UI_Controller controller;
 	LV2UI_Write_Function write_function;
 } AmpGui;
 
-void volume_changed(Fl_Widget* widget, void* data) {
+void gain_changed(Fl_Widget* widget, void* data) {
 	Fl_Dial* dial = (Fl_Dial*)widget;
-	AmpGui *pluginGui = (AmpGui*) data;
+	AmpGui* pluginGui = (AmpGui*) data;
 
 	pluginGui->gain = dial->value();
 	pluginGui->write_function(pluginGui->controller, AMP_GAIN, sizeof(pluginGui->gain), 0, &pluginGui->gain);
@@ -32,10 +32,10 @@ Fl_Window* create_window(void* parentXwindow, AmpGui* pluginGui) {
 	Fl_Window* window = new Fl_Double_Window(300, 160);
 
 	window->begin();
-	pluginGui->volume_control = new Fl_Dial(100, 20, 100, 100, "Gain");
-	pluginGui->volume_control->range(-90, 24);
-	pluginGui->volume_control->step(0.1);
-	pluginGui->volume_control->callback(volume_changed, (void *)pluginGui);
+	pluginGui->gain_control = new Fl_Dial(100, 20, 100, 100, "Gain");
+	pluginGui->gain_control->range(-90, 24);
+	pluginGui->gain_control->step(0.1);
+	pluginGui->gain_control->callback(gain_changed, (void*)pluginGui);
 	window->end();
 
 	fl_embed(window, (Window)parentXwindow);
@@ -43,7 +43,7 @@ Fl_Window* create_window(void* parentXwindow, AmpGui* pluginGui) {
 	return window;
 }
 
-	static int
+static int
 idle(LV2UI_Handle handle)
 {
 	Fl::check();
@@ -55,11 +55,11 @@ idle(LV2UI_Handle handle)
 static const LV2UI_Idle_Interface idle_iface = { idle };
 
 LV2UI_Handle
-instantiate(const struct _LV2UI_Descriptor * descriptor,
+instantiate(const struct _LV2UI_Descriptor* descriptor,
 		const char* plugin_uri, const char* bundle_path,
 		LV2UI_Write_Function write_function,
 		LV2UI_Controller controller, LV2UI_Widget* widget,
-		const LV2_Feature* const * features) {
+		const LV2_Feature* const* features) {
 
 	if (strcmp(plugin_uri, AMP_URI) != 0) {
 		fprintf(stderr, "AMP_UI error: this GUI does not support plugin with URI %s\n", plugin_uri);
@@ -105,15 +105,15 @@ port_event(LV2UI_Handle ui,
 		uint32_t port_index,
 		uint32_t buffer_size,
 		uint32_t format,
-		const void * buffer) {
-	AmpGui* pluginGui = (AmpGui*) ui;
-	float* pval = (float*) buffer;
+		const void* buffer) {
+	AmpGui* pluginGui = (AmpGui*)ui;
+	float* pval = (float*)buffer;
 
 	if ((format != 0) || (port_index < 0) || (port_index >= AMP_N_PORTS)) {
 		return;
 	}
 
-	pluginGui->volume_control->value(*pval);
+	pluginGui->gain_control->value(*pval);
 }
 
 const void*
