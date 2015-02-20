@@ -52,7 +52,7 @@ idle(LV2UI_Handle handle)
 
 static const LV2UI_Idle_Interface idle_iface = { idle };
 
-extern LV2UI_Handle
+LV2UI_Handle
 instantiate(const struct _LV2UI_Descriptor * descriptor,
 		const char* plugin_uri, const char* bundle_path,
 		LV2UI_Write_Function write_function,
@@ -91,14 +91,14 @@ instantiate(const struct _LV2UI_Descriptor * descriptor,
 	return (LV2UI_Handle)pluginGui;
 }
 
-extern void
+void
 cleanup(LV2UI_Handle ui) {
 	AmpGui* pluginGui = (AmpGui*) ui;
 
 	free(pluginGui);
 }
 
-extern void
+void
 port_event(LV2UI_Handle ui,
 		uint32_t port_index,
 		uint32_t buffer_size,
@@ -114,7 +114,7 @@ port_event(LV2UI_Handle ui,
 	pluginGui->volume_control->value(*pval);
 }
 
-extern const void*
+const void*
 extension_data(const char* uri) {
 	if (!strcmp(uri, LV2_UI__idleInterface)) { return &idle_iface; }
 

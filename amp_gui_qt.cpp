@@ -51,7 +51,7 @@ void AmpGui::volumeChanged(int value) {
 	write_function(controller, AMP_GAIN, sizeof(gain), 0, &gain);
 }
 
-extern LV2UI_Handle
+LV2UI_Handle
 instantiate(const struct _LV2UI_Descriptor * descriptor,
 		const char* plugin_uri, const char* bundle_path,
 		LV2UI_Write_Function write_function,
@@ -77,10 +77,10 @@ instantiate(const struct _LV2UI_Descriptor * descriptor,
 	return (LV2UI_Handle)pluginGui;
 }
 
-extern void
+void
 cleanup(LV2UI_Handle ui) { }
 
-extern void
+void
 port_event(LV2UI_Handle ui, uint32_t port_index, uint32_t buffer_size,
 	uint32_t format, const void * buffer) {
 	AmpGui* pluginGui = (AmpGui*) ui;
@@ -93,7 +93,7 @@ port_event(LV2UI_Handle ui, uint32_t port_index, uint32_t buffer_size,
 	pluginGui->volume_dial->setValue((int)(*pval + 0.5));
 }
 
-extern const void*
+const void*
 extension_data(const char* uri) { return NULL; }
 
 static LV2UI_Descriptor descriptor = {
