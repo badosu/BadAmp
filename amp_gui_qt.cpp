@@ -70,11 +70,11 @@ instantiate(const struct _LV2UI_Descriptor* descriptor,
 
 	if (pluginGui == NULL) return NULL;
 
-	QObject::connect(pluginGui->gain_dial, SIGNAL(valueChanged(int)),
-		pluginGui, SLOT(gainChanged(int)));
-
 	pluginGui->controller = controller;
 	pluginGui->write_function = write_function;
+
+	QObject::connect(pluginGui->gain_dial, SIGNAL(valueChanged(int)),
+		pluginGui, SLOT(gainChanged(int)));
 
 	return (LV2UI_Handle)pluginGui;
 }
