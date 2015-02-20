@@ -92,7 +92,9 @@ port_event(LV2UI_Handle ui, uint32_t port_index, uint32_t buffer_size,
 		return;
 	}
 
-	pluginGui->gain_dial->setValue((int)(*pval + 0.5));
+	// Multiplication by 10 is to adjust for the dial step quantity
+	// Addition by 0.5 is to round to int correctly
+	pluginGui->gain_dial->setValue((int)((*pval * 10) + 0.5));
 }
 
 const void*
